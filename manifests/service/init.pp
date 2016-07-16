@@ -129,6 +129,10 @@ define logstash::service::init{
   if($::operatingsystem == 'debian' and $::operatingsystemmajrelease == '8'){
     $service_provider = 'systemd'
   }
+  # Puppet 4 assumes that CentOS 7 uses systemd, but the package does not have a systemd script yet
+  elsif ($::operatingsystem == 'CentOS' and $::operatingsystemmajrelease == '7') {
+    $service_provider = 'redhat'
+  }
   else {
     # In most cases, Puppet can figure out the correct service
     # provider on its own, so we'll just say 'undef', and let it do
