@@ -33,8 +33,6 @@ class logstash::repo {
 
   case $::osfamily {
     'Debian': {
-      require apt
-
       apt::source { 'logstash':
         location    => "http://packages.elasticsearch.org/logstash/${logstash::repo_version}/debian",
         release     => 'stable',
